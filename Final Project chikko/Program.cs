@@ -273,7 +273,7 @@ namespace SmartStudyPlanner
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("⚠️ ผู้ใช้กรอกเวลาไม่ถูกต้อง! ชั่วโมงต้องอยู่ระหว่าง 00-23 และนาที 00-59 (เช่น 08.30, 10.45)");
+                Console.WriteLine("⚠️ Invalid time! Hours must be between 00-23 and minutes 00-59 (e.g., 08.30, 10.45)");
                 Console.WriteLine("   -> กรุณาพิมพ์ใหม่ หรือ [กด Enter เปล่าๆ เพื่อกลับหน้าเมนูหลัก]");
                 Console.ResetColor();
             }
