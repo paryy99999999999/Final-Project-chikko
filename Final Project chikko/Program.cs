@@ -300,8 +300,8 @@ namespace SmartStudyPlanner
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"⚠️ ผู้ใช้กรอกเลขไม่ถูกต้อง! ต้องเป็นตัวเลขระหว่าง {minVal} ถึง {maxVal}");
-                Console.WriteLine("   -> กรุณาพิมพ์ใหม่ หรือ [กด Enter เปล่าๆ เพื่อกลับหน้าเมนูหลัก]");
+                Console.WriteLine($"⚠️ Invalid number! Must be a number between {minVal} and {maxVal}");
+                Console.WriteLine("   -> Please try again or [press Enter to return to the main menu]");
                 Console.ResetColor();
             }
         }
@@ -327,8 +327,8 @@ namespace SmartStudyPlanner
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"⚠️ ผู้ใช้กรอกเลขไม่ถูกต้อง! ต้องเป็นตัวเลขระหว่าง {minVal} ถึง {maxVal}");
-                Console.WriteLine("   -> กรุณาพิมพ์ใหม่ หรือ [กด Enter เปล่าๆ เพื่อกลับหน้าเมนูหลัก]");
+                Console.WriteLine($"⚠️ Invalid number! Must be between {minVal} and {maxVal}");
+                Console.WriteLine("   -> Please try again or [press Enter to return to the main menu]");
                 Console.ResetColor();
             }
         }
@@ -407,7 +407,7 @@ namespace SmartStudyPlanner
         {
             Console.Clear();
             Console.WriteLine("=========================================================================================");
-            Console.WriteLine("                               WEEKLY TIMETABLE (ตารางเรียนประจำสัปดาห์)                   ");
+            Console.WriteLine("                               WEEKLY TIMETABLE                    ");
             Console.WriteLine("=========================================================================================");
 
             bool hasAnyClass = false;
@@ -428,47 +428,47 @@ namespace SmartStudyPlanner
                             ? s.SubjectCode
                             : $"{s.SubjectCode} ({s.SectionInfo})";
 
-                        Console.WriteLine($"  เวลา : {timeRange,-14} วิชา : {subjectDisplay,-32} ห้อง : {s.RoomInfo,-15}");
+                        Console.WriteLine($"  Time : {timeRange,-14} Subject : {subjectDisplay,-32} Room : {s.RoomInfo,-15}");
                     }
                 }
             }
 
             if (!hasAnyClass)
             {
-                Console.WriteLine("\n                                  ยังไม่มีวิชาเรียนในตาราง                                 ");
+                Console.WriteLine("\n                                  No classes scheduled yet                                 ");
             }
 
             Console.WriteLine("\n=========================================================================================");
 
-            if (GetYesNoInput("\nต้องการเพิ่ม/แก้ไขตารางเรียนหรือไม่? (พิมพ์ yes หรือ no): "))
+            if (GetYesNoInput("\nDo you want to add/edit the timetable? (Type yes or no):"))
             {
-                int? selectedDay = GetValidIntInput("เลือกวัน (0:จันทร์, 1:อังคาร, 2:พุธ, 3:พฤหัส, 4:ศุกร์, 5:เสาร์, 6:อาทิตย์) [Enter กลับเมนูหลัก]: ", 0, 6);
+                int? selectedDay = GetValidIntInput("Select day (0: Monday, 1: Tuesday, 2: Wednesday, 3: Thursday, 4: Friday, 5: Saturday, 6: Sunday) [Enter to return to main menu]: ", 0, 6);
                 if (selectedDay == null) return;
 
-                Console.Write("กรอกรหัส/ชื่อวิชา (เช่น Computer Programming) [Enter กลับเมนูหลัก]: ");
+                Console.Write("Enter subject code/name (e.g., Computer Programming) [Enter to return to main menu]: ");
                 string subCode = Console.ReadLine()?.Trim();
                 if (string.IsNullOrEmpty(subCode)) return;
 
-                Console.Write("กรอกกลุ่มเรียน/ประเภท (เช่น LECT-1 หรือ - หากไม่มี): ");
+                Console.Write("Enter section/type (e.g., LECT-1 or - if none): ");
                 string secInfo = Console.ReadLine()?.Trim();
                 if (string.IsNullOrEmpty(secInfo)) secInfo = "-";
 
-                Console.Write("กรอกห้องเรียน (เช่น E3 B 101): ");
+                Console.Write("Enter room (e.g., E3 B 101): ");
                 string roomInfo = Console.ReadLine()?.Trim();
                 if (string.IsNullOrEmpty(roomInfo)) roomInfo = "-";
 
-                int? startMins = GetFlexibleTimeInput("เวลาเริ่มต้น (ใส่นาทีได้อิสระ เช่น 10.15, 13.45) [Enter กลับเมนูหลัก]: ");
+                int? startMins = GetFlexibleTimeInput("Start time (flexible minutes, e.g., 10.15, 13.45) [Enter to return to main menu]: ");
                 if (startMins == null) return;
 
-                int? endMins = GetFlexibleTimeInput("เวลาสิ้นสุด (ใส่นาทีได้อิสระ เช่น 12.10, 15.30) [Enter กลับเมนูหลัก]: ");
+                int? endMins = GetFlexibleTimeInput("End time (flexible minutes, e.g., 12.10, 15.30) [Enter to return to main menu]: ");
                 if (endMins == null) return;
 
                 while (endMins.Value <= startMins.Value)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("⚠️ ผู้ใช้กรอกเวลาไม่ถูกต้อง! เวลาสิ้นสุดต้องมากกว่าเวลาเริ่มต้น");
+                    Console.WriteLine("⚠️ Invalid time! End time must be later than start time.");
                     Console.ResetColor();
-                    endMins = GetFlexibleTimeInput("กรอกเวลาสิ้นสุดใหม่อีกครั้ง [หรือกด Enter กลับหน้าเมนูหลัก]: ");
+                    endMins = GetFlexibleTimeInput("Enter end time again [or press Enter to return to the main menu]: ");
                     if (endMins == null) return;
                 }
 
@@ -479,11 +479,11 @@ namespace SmartStudyPlanner
                 if (overlappingSlots.Count > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("⚠️ พบวิชาเรียนที่มีช่วงเวลาซ้อนทับกันในวันดังกล่าว!");
+                    Console.WriteLine("⚠️ Time overlap detected with an existing class on this day!");
                     Console.ResetColor();
-                    if (!GetYesNoInput("คุณต้องการลบวิชาที่ซ้อนทับและบันทึกวิชาใหม่แทนหรือไม่? (พิมพ์ yes หรือ no): "))
+                    if (!GetYesNoInput("Do you want to remove the overlapping class and save the new one instead? (Type yes or no): "))
                     {
-                        Console.WriteLine("\n[ยกเลิกการเพิ่มวิชา] กด Enter เพื่อกลับหน้าเมนูหลัก...");
+                        Console.WriteLine("\n[Class addition cancelled] Press Enter to return to the main menu...");
                         Console.ReadLine();
                         return;
                     }
@@ -495,10 +495,10 @@ namespace SmartStudyPlanner
                 }
 
                 weeklySchedule[selectedDay.Value].Add(new ScheduleSlot(subCode, secInfo, roomInfo, startMins.Value, endMins.Value));
-                Console.WriteLine("\n✅ [อัปเดตวิชาลงในตารางเรียนชั่วคราวแล้ว! (อย่าลืมกดเมนู 8 เพื่อบันทึกลงไฟล์)]");
+                Console.WriteLine("\n✅ [Class temporarily updated in the schedule! (Don't forget to use menu 8 to save to file)]");
             }
 
-            Console.WriteLine("\nกด Enter เพื่อกลับหน้าเมนูหลัก...");
+            Console.WriteLine("\nPress Enter to return to the main menu...");
             Console.ReadLine();
         }
 
