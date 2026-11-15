@@ -139,7 +139,7 @@ namespace SmartStudyPlanner
     {
         static List<Subject> subjects = new List<Subject>();
         static List<ScheduleSlot>[] weeklySchedule = new List<ScheduleSlot>[7];
-        static string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "วันศุกร์", "วันเสาร์", "วันอาทิตย์" };
+        static string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
         static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "study_planner_data.txt");
 
         static void Main(string[] args)
@@ -161,16 +161,16 @@ namespace SmartStudyPlanner
                 Console.WriteLine("         Smart Study & Exam Schedule Planner (Smart Planner)      ");
                 Console.WriteLine("=========================================================================================");
                 Console.WriteLine(" 1. View & Manage Weekly Timetable");
-                Console.WriteLine(" 2. บันทึกคะแนนเก็บและคำนวณเกรดรายวิชา (เลือกกรอกเฉพาะรายการที่เว้นไว้ หรือกรอกใหม่ทั้งหมด)");
-                Console.WriteLine(" 3. เพิ่มรายชื่อวิชาใหม่ (เลือกเกณฑ์ตัดเกรด CP/Eng หรือกำหนดเกณฑ์เอง)");
-                Console.WriteLine(" 4. คำนวณคะแนนที่ขาดเพื่ออัปเกรด (แจกแจงรายละเอียดทุกเกรด A ถึง D)");
-                Console.WriteLine(" 5. จัดลำดับความสำคัญวิชาที่ควรโฟกัสอ่านหนังสือก่อน (เรียงจากคะแนนน้อยสุด)");
-                Console.WriteLine(" 6. ดูสรุปข้อมูลรวมทั้งหมดของแต่ละวิชา");
-                Console.WriteLine(" 7. ล้างข้อมูล (Clear Data) ล้างเฉพาะวิชา/ช่วงเวลา หรือล้างทั้งหมด");
-                Console.WriteLine(" 8. บันทึกข้อมูลลงไฟล์ (Save Data)");
-                Console.WriteLine(" 9. ออกจากโปรแกรม");
+                Console.WriteLine(" 2. Record Continuous Assessment Scores & Calculate Grades");
+                Console.WriteLine(" 3. Add New Subject");
+                Console.WriteLine(" 4. Calculate Missing Points Needed for Grade Upgrade");
+                Console.WriteLine(" 5. Prioritize Subjects to Focus on for Studying");
+                Console.WriteLine(" 6. View Comprehensive Summary for Each Subject");
+                Console.WriteLine(" 7. Clear Data");
+                Console.WriteLine(" 8. Save Data to File");
+                Console.WriteLine(" 9. Exit Program");
                 Console.WriteLine("=========================================================================================");
-                Console.Write("เลือกเมนู (1-9): ");
+                Console.Write("Select menu (1-9): ");
 
                 string choice = Console.ReadLine()?.Trim();
 
@@ -199,13 +199,13 @@ namespace SmartStudyPlanner
                         break;
                     case "8":
                         SaveDataToFile();
-                        Console.WriteLine("\n✅ [บันทึกข้อมูลลงไฟล์เรียบร้อยแล้ว! ข้อมูลล่าสุดถูกอัปเดตทับไฟล์เดิมแล้ว]");
-                        Console.WriteLine("กด Enter เพื่อกลับ...");
+                        Console.WriteLine("\n✅ [Data successfully saved to file! The latest data has overwritten the existing file]");
+                        Console.WriteLine("Press Enter to return...");
                         Console.ReadLine();
                         break;
                     case "9":
                         running = false;
-                        Console.WriteLine("\nขอบคุณที่ใช้งานระบบ!");
+                        Console.WriteLine("\nThank you for using the system!");
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
