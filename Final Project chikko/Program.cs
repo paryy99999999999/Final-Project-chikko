@@ -209,7 +209,7 @@ namespace SmartStudyPlanner
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n⚠️ ผู้ใช้กรอกตัวเลือกไม่ถูกต้อง! กรุณาเลือก 1-9 เท่านั้น (กด Enter เพื่อลองใหม่)");
+                        Console.WriteLine("\n⚠️ nvalid option! Please choose between 1 and 9 only (Press Enter to try again)");
                         Console.ResetColor();
                         Console.ReadLine();
                         break;
@@ -231,7 +231,7 @@ namespace SmartStudyPlanner
                 if (input == "no") return false;
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("⚠️ ผู้ใช้กรอกไม่ถูกต้อง! กรุณาพิมพ์เฉพาะคำว่า 'yes' หรือ 'no' เท่านั้น");
+                Console.WriteLine("⚠️ Invalid input! Please type only 'yes' or 'no'");
                 Console.ResetColor();
             }
         }
@@ -254,8 +254,8 @@ namespace SmartStudyPlanner
                 if (!inputStr.Contains("."))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("⚠️ ผู้ใช้กรอกเวลาไม่ถูกต้อง! ต้องใช้จุด '.' แบ่งชั่วโมงและนาที เช่น 10.15 หรือ 13.45");
-                    Console.WriteLine("   -> กรุณาพิมพ์ใหม่ หรือ [กด Enter เปล่าๆ เพื่อกลับหน้าเมนูหลัก]");
+                    Console.WriteLine("⚠️ Invalid time format! You must use a dot '.' to separate hours and minutes, e.g., 10.15 or 13.45");
+                    Console.WriteLine("   -> Please try again or [press Enter to return to the main menu]");
                     Console.ResetColor();
                     continue;
                 }
